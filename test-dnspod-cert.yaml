@@ -1,0 +1,18 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: test-dnspod-cert # 证书名
+  namespace: default  # 证书要存放的命名空间
+spec:
+  secretName: test-dnspod-cert # 证书名
+  # re-new certificate when it expires in less than 60 days
+  renewBefore: 1440h0m0s
+  commonName: q77.scjtqs.com
+  dnsNames:
+    - q77.scjtqs.com
+    - "*.scjtqs.com"
+  issuerRef:
+    kind: ClusterIssuer
+    name: dnspod # 你自己配置好的 dns验证 方式的 证书渠道名。不要乱填/改
+    group: cert-manager.io

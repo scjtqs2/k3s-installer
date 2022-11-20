@@ -1,0 +1,12 @@
+# 初始化配置文件
+write-kubeconfig-mode: "0644"
+tls-san:
+  - "achou.mobyds.com" # 域名
+  - 192.9.136.119      # 公网ip
+  - 10.0.0.122         # 内网ip
+  - 127.0.0.1          # 你能用到的都加上
+service-cidr:
+  -  10.96.0.0/12
+cluster-cidr: 
+  - 172.16.0.0/12
+service-node-port-range: 1-65535

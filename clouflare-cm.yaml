@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloudflare-api-token-secret
+  namespace: cert-manager
+type: Opaque
+stringData:
+  api-token: 你的非全局token  # 粘贴 Token 到这里，不需要 base64 加密。
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloudflare-api-key-secret
+type: Opaque
+stringData:
+  api-key: 你的全局key  # 全局token，不需要 base64 加密。
+
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: cloudflare
+spec:
+  acme:
+    privateKeySecretRef:
+      name: cloudflare
+    server: https://acme-v02.api.letsencrypt.org/directory
+    solvers:
+    - dns01:
+        cnameStrategy: None
+        cloudflare:
+          email: <你的邮箱>  # 替换成你的 cloudflare 邮箱账号，API Token 方式认证非必需，API Keys 认证是必需
+          apiTokenSecretRef:       # apiTokenSecretRef 和 apiKeySecretRef 二选一
+            key: api-token
+            name: cloudflare-api-token-secret # api token令牌。 需要： 1."区域（zone）"的读取权限。 2."DNS"的编辑权限。 3.资源区域(zone)选择"所有区域"
+          #apiKeySecretRef:
+          #  name: cloudflare-api-key-secret  # 全局token （Global API Key）
+          #  key: api-key
+
