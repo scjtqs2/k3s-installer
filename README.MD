@@ -73,6 +73,3 @@ kubectl apply -f kuboard-v3.yaml
 1. `sudo k3s-killall.sh`
 2. `sudo k3s-uninstall.sh` (for master) or `sudo k3s-agent-uninstall.sh` (for node)
 
-## 五、 关于ingress
-k3s预制了一个Ingress: `traefik`
-需要将正常的`ingressClassName: nginx` 替换成 `ingressClassName: traefik`
