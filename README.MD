@@ -19,7 +19,9 @@ bash init-config.sh
 # 安装k3s
 sudo  ./install-master.sh
 # 复制秘钥到当前账号
-sudo cp -r /root/.kube ~/
+mkdir -p $HOME/.kube
+sudo cp -i /etc/rancher/k3s/k3s.yaml $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 3. 安装web控制面板，这里使用的是Kuboard。
 ```shell
