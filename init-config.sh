@@ -45,12 +45,12 @@ sudo apt-get install containerd.io
 # 不需要完整的docker。只需要有containerd就行
 
 # 安装k8s
-echo "开始安装k8s 命令工具"
-#curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add -
+# echo "开始安装k8s 命令工具"
+# #curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add -
 
-sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg
-echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://mirrors.tuna.tsinghua.edu.cn/kubernetes/apt kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/k8s.list
-sudo apt-get update
-sudo apt install -y kubectl=1.23.14-00 --allow-downgrades --allow-change-held-packages
-sudo apt-mark hold kubectl
+# sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg
+# echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://mirrors.tuna.tsinghua.edu.cn/kubernetes/apt kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/k8s.list
+# sudo apt-get update
+# sudo apt install -y kubectl=1.23.14-00 --allow-downgrades --allow-change-held-packages
+# sudo apt-mark hold kubectl
 
