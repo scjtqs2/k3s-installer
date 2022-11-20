@@ -73,3 +73,7 @@ kubectl apply -f kuboard-v3.yaml
 1. `sudo k3s-killall.sh`
 2. `sudo k3s-uninstall.sh` (for master) or `sudo k3s-agent-uninstall.sh` (for node)
 
+## 五、 关于ingress
+进入到 ingress-nginx命名空间。
+推荐使用hostport方式安装。如果你有2台机器，那么请将`ingress-nginx-controller`的副本数调整为2。
+如果你是5台设备，对应副本数调整为5.确保每台机器上都运行一个`ingress-nginx-controller`。
