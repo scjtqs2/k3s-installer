@@ -17,7 +17,7 @@ bash init-config.sh
 2. master节点的机器上执行：
 ```shell
 # 安装k3s
-bash install-master.sh
+sudo  ./install-master.sh
 # 复制秘钥到当前账号
 sudo cp -r /root/.kube ~/
 ```
@@ -55,9 +55,13 @@ kubectl apply -f kuboard-v3.yaml
 
 ## 三、初始化你的 k3s （node节点）机器
 1. 修改`install-node.sh` 文件，`K3S_URL`的地址为你的 master的对应地址。
-2. 执行`bash install-node.sh` 文件
+2. 执行`sudo ./install-node.sh` 文件
 
 
 ## 四、 卸载删除你的k3s服务
 1. `sudo k3s-killall.sh`
 2. `sudo k3s-uninstall.sh` (for master) or `sudo k3s-agent-uninstall.sh` (for node)
+
+## 五、 关于ingress
+k3s预制了一个Ingress: `traefik`
+需要将正常的`ingressClassName: nginx` 替换成 `ingressClassName: traefik`
