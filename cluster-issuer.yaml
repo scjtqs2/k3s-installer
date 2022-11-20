@@ -1,0 +1,15 @@
+# 配置 一个默认的http方式的认证,非dns认证的方式
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: 524719755@qq.com
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:    
+    - http01:
+        ingress:
+          class: nginx
