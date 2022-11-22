@@ -40,6 +40,8 @@ kubectl apply -f kuboard-v3.yaml
       ```
       #### 卸载方式：
       `sudo snap remove helm`
+   3. 通过二进制包安装：
+      去`https://github.com/helm/helm/releases`下载安装即可
 5. 安装证书免费签发工具cert-manager
    `bash install-CRDs-with-customdns.sh`
    #### 卸载方式
