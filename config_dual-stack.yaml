@@ -5,8 +5,14 @@ tls-san:
   - 192.9.136.119      # 公网ip
   - 10.0.0.122         # 内网ip
   - 127.0.0.1          # 你能用到的都加上
+  - ::1
 service-cidr:
-  -  10.96.0.0/12
-cluster-cidr: 
+  - 10.96.0.0/12
+  - fd00::/108
+cluster-cidr:
   - 172.16.0.0/12
+  - fc00::/48
+node-ip:
+  - 10.0.10.7                             # lan口的ipv4地址
+  - 2a05:d012:c6f:4611:5c2:5602:eed2:898c # 你的ipv6公网地址
 service-node-port-range: 1-65535
