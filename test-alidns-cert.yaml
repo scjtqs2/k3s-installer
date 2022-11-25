@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: test-alidns-tls   # 证书名
+  namespace: default  # 证书要存放的命名空间
+spec:
+  secretName: ymzhang-com-tls
+  commonName: ymzhang.com
+  dnsNames:
+    - ymzhang.com
+    - "*.ymzhang.com"
+  issuerRef:
+    name: alidns
+    kind: ClusterIssuer
