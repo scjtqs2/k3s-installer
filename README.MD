@@ -46,7 +46,18 @@ kubectl apply -f kuboard-v3.yaml
    `bash install-CRDs-with-customdns.sh`
    #### 卸载方式
    `helm uninstall cert-manager --namespace cert-manager`
-6. (可选，非必须) 添加dnspod(实际是腾讯云接口)的dns证书签名验证方式
+6. 安装ingress(1.3.0)，这里有两种方式安装,二选一:
+   1. hostport。会占用本机的80和443端口。如果本机不需要nginx或者nginx配置成其他端口，可以使用。
+   > `kubectl apply -f ingress_hostport.yaml`
+   2. nodeport。会随机生成两个端口，分别代表http和https端口。不会占用本机的80和443。
+   > `kubectl apply -f ingress_nodeport.yaml`
+   >
+   > 安装完成后，执行 `kubectl get svc -n ingress-nginx` 可以看到 80和443分别映射出来的端口。
+   >
+   > 输入 `kubectl get pod -n ingress-nginx` 查看ingress的安装进度。等所有pod都ok了，就可以了。
+   #### 卸载说明
+   > `kbuectl delete -f ingress_hostport.yaml` 或者  `kbuectl delete -f ingress_nodeport.yaml` 填你安装的时候选择的方式。
+7. (可选，非必须) 添加dnspod(实际是腾讯云接口)的dns证书签名验证方式
    > 需要先安装 cert-manager 才能安装该 cert-manager的插件。
    1. 通过 https://console.cloud.tencent.com/cam/capi 获取`secretid`和 `secretkey`.
    2. 修改 `install-qcloud-cm.sh` 中的对应的参数 
@@ -56,17 +67,25 @@ kubectl apply -f kuboard-v3.yaml
       2. 执行 `kubectl -f test-dnspod-cert.yaml`
    #### 卸载方式：
    `helm uninstall cert-manager-webhook-dnspod -n cert-manager`
-7. 安装ingress(1.3.0)，这里有两种方式安装,二选一:
-   1. hostport。会占用本机的80和443端口。如果本机不需要nginx或者nginx配置成其他端口，可以使用。
-     > `kubectl apply -f ingress_hostport.yaml`
-   2. nodeport。会随机生成两个端口，分别代表http和https端口。不会占用本机的80和443。
-   > `kubectl apply -f ingress_nodeport.yaml`
-   > 
-   > 安装完成后，执行 `kubectl get svc -n ingress-nginx` 可以看到 80和443分别映射出来的端口。
-   >
-   > 输入 `kubectl get pod -n ingress-nginx` 查看ingress的安装进度。等所有pod都ok了，就可以了。
-   #### 卸载说明
-   > `kbuectl delete -f ingress_hostport.yaml` 或者  `kbuectl delete -f ingress_nodeport.yaml` 填你安装的时候选择的方式。
+8. (可选，非必须) 添加cloudflare 方式进行dns证书签名
+   1. 打开`clouflare-cm.yaml` 填入你的对应信息。
+   2. `apiTokenSecretRef` 和 `apiKeySecretRef` 二选一。注释掉另一方。
+   3. 执行 `kubectl apply -f clouflare-cm.yaml`
+   4. 证书申请demo：
+      1. 修改 `test-cf-cert.yaml` 中的域名、证书名、命名空间
+      2. 执行 `kubectl -f test-cf-cert.yaml`
+   #### 卸载方式：
+   `kubectl delete -f clouflare-cm.yaml`
+9. (可选，非必须) 添加aliyun的dns证书签名验证方式
+   > 需要先安装 cert-manager 才能安装该 cert-manager的插件。
+   1. 通过 https://ak-console.aliyun.com/?spm=5176.2020520001.0.0.dCHOyj#/accesskey 获取`Access Key ID`和 `Access Key Secret`.
+   2. 修改 `install-aliyun-cm.sh` 中的对应的参数
+   3. 执行 `bash install-aliyun-cm.sh`
+   4. 证书申请demo：
+      1. 修改 `test-alidns-cert.yaml` 中的域名、证书名、命名空间
+      2. 执行 `kubectl -f test-alidns-cert.yaml`
+   #### 卸载方式：
+   `kubectl delete -f alidns.yaml`
 
 ## 三、初始化你的 k3s （node节点）机器
 1. 修改`install-node.sh` 文件，`K3S_URL`的地址为你的 master的对应地址。
