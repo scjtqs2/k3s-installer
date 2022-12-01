@@ -23,6 +23,10 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/rancher/k3s/k3s.yaml $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
+> 如果你的网络对github的release下载不友好。
+> 
+> 请使用 `sudo ./install-master-cnproxy.sh`代替。
+
 3. 安装web控制面板，这里使用的是Kuboard。
 ```shell
 kubectl apply -f kuboard-v3.yaml
@@ -90,7 +94,9 @@ kubectl apply -f kuboard-v3.yaml
 ## 三、初始化你的 k3s （node节点）机器
 1. 修改`install-node.sh` 文件，`K3S_URL`的地址为你的 master的对应地址。
 2. 执行`sudo ./install-node.sh` 文件
-
+> 如果你的网络对github的release下载不友好。
+>
+> 请使用 `sudo ./install-node_cnproxy.sh`代替。
 
 ## 四、 卸载删除你的k3s服务
 1. `sudo k3s-killall.sh`
