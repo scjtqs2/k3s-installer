@@ -362,7 +362,8 @@ spec:
   type: NodePort
   ipFamilies:
     - IPv4
-  ipFamilyPolicy: SingleStack
+    - IPv6
+  ipFamilyPolicy: PreferDualStack
 ---
 apiVersion: v1
 kind: Service
