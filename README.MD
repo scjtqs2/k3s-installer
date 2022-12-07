@@ -12,6 +12,9 @@ bash init-config.sh
 + 安装1.23.14版本的k8s工具
 #### 如果上述部分内容你已经有了，可以查看`init-config.sh`脚本，手动执行部分命令。
 
+### ！！！！！！文件后缀说明！！！！！！
++ `cnproxy`： 国内网络环境，套了一层代理，防止出现github等访问失败的特殊处理脚本
++ `dual-stack`: 增加了对ipv6的支持。ipv4和ipv6双栈支持。
 ## 二、初始化你的 k3s 机器（master)
 1. 修改 `config.yaml`文件，为你自己的配置
 2. master节点的机器上执行：
