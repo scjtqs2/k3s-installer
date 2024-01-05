@@ -109,3 +109,13 @@ kubectl apply -f kuboard-v3.yaml
 进入到 ingress-nginx命名空间。
 推荐使用hostport方式安装。如果你有2台机器，那么请将`ingress-nginx-controller`的副本数调整为2。
 如果你是5台设备，对应副本数调整为5.确保每台机器上都运行一个`ingress-nginx-controller`。
+
+### !!!k3s 系统证书问题 【集群所有机器环境安装完成后必须执行】
+因为默认生成的证书有效期只有1年，所以每年都需要更新一次系统证书。
+
+K3s 证书的轮换非常简单，只需要在过期前 90 天内重启 K3s 的服务即可，而且重启 K3s 服务不会影响 业务容器。
+
+但是k3s的证书 是由k3s进程重新启动来自行判断进行轮换的。因此需要在部署的机器上添加一个 crontab的配置。每个月重启一次k3s的服务。
+```
+0 19 1 * * systemctl restart k3s
+```
