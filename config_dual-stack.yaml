@@ -8,11 +8,11 @@ tls-san:
   - ::1
 service-cidr:
   - 10.96.0.0/12
-  - fd00::/108
+  - 2001:cafe:43::/112
 cluster-cidr:
   - 172.16.0.0/12
-  - fc00::/48
-node-ip:
-  - 10.0.10.7                             # lan口的ipv4地址
-  - 2a05:d012:c6f:4611:5c2:5602:eed2:898c # 你的ipv6公网地址
+  - 2001:cafe:42::/56
+#node-ip:
+#  - 10.0.10.7                             # lan口的ipv4地址
+#  - 2a05:d012:c6f:4611:5c2:5602:eed2:898c # 你的ipv6公网地址
 service-node-port-range: 1-65535
