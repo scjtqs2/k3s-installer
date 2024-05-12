@@ -426,6 +426,7 @@ spec:
         - --election-id=ingress-nginx-leader
         - --controller-class=k8s.io/ingress-nginx
         - --ingress-class=nginx
+        - --watch-ingress-without-class
         - --configmap=$(POD_NAMESPACE)/ingress-nginx-controller
         - --validating-webhook=:8443
         - --validating-webhook-certificate=/usr/local/certificates/cert
@@ -625,6 +626,8 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.10.1
+  annotations:
+    ingressclass.kubernetes.io/is-default-class: "true"
   name: nginx
 spec:
   controller: k8s.io/ingress-nginx
